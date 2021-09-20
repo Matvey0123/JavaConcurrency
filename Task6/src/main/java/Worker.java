@@ -14,11 +14,11 @@ public class Worker implements Runnable {
     @Override
     public void run() {
         department.performCalculations();
+        System.out.println("Department " + department.getIdentifier() + " has completed its work! It worked " + department.getWorkingSeconds() + " seconds.");
         try {
             cyclicBarrier.await();
         } catch (InterruptedException | BrokenBarrierException e) {
             System.out.println("Exception in run method");
         }
-        System.out.println("Department " + department.getIdentifier() + " has completed its work! It worked " + department.getWorkingSeconds() + " seconds.");
     }
 }
