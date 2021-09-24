@@ -1,18 +1,18 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CyclicBarrier;
 
 public class Main {
 
     public static void main(String[] args) {
         final int countThreads = Integer.parseInt(args[0]);
-        List<Counter> threads = new ArrayList<>(countThreads);
+        List<Counter> counters = new ArrayList<>(countThreads);
         for (int i = 0; i < countThreads; i++) {
-            threads.add(i, new Counter(i, countThreads));
+            counters.add(i, new Counter(i, countThreads));
         }
-        for (Counter counter : threads) {
-            new Thread(counter).start();
+        CyclicBarrier cyclicBarrier = new CyclicBarrier(countThreads, new BarAction(counters));
+        for (Counter counter : counters) {
+            new Thread(new MyThread(counter, cyclicBarrier)).start();
         }
-        double totalSum = threads.stream().map(Counter::getPartialSum).reduce(Double::sum).orElse(0.0);
-        System.out.println("Total sum: " + (totalSum * 4.0));
     }
 }
