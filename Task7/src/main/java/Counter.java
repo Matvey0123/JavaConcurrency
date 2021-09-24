@@ -1,9 +1,9 @@
-public class Counter implements Runnable {
+public class Counter {
 
-    private static final int countIterations = 99999;
+    private static final int countIterations = 999999999;
     int position;
     int shift;
-    double partialSum = 0.0;
+    double partialSum = 0.0d;
 
     public Counter(int position, int shift) {
         this.position = position;
@@ -14,10 +14,9 @@ public class Counter implements Runnable {
         return partialSum;
     }
 
-    @Override
-    public void run() {
+    public void count() {
         while (position <= countIterations) {
-            partialSum += Math.pow(-1.0, position) / (2.0 * position + 1.0);
+            partialSum += 4.0d * Math.pow(-1.0d, position) / (2.0d * position + 1.0d);
             position += shift;
         }
     }
