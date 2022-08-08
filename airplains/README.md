@@ -1,5 +1,5 @@
 Design the RESTful web service to handle the following requests:
-  List all the available source and destination cities
+- List all the available source and destination cities
   List all the available source and destination airports
   List the airports within a city
   List the inbound schedule for an airport: 
